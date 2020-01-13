@@ -6,19 +6,8 @@ export default function sketch (p) {
 
     let skatePos;
 
-    /**
-     * 1. Divide Skateboard into separate objects
-        * a. Decktop - tape texture
-        * b. Deckbottom - deck texture
-        * c. 4 Wheels - Wheel texture
-        * d. 2 Trucks - Truck texture
-     * 2. Design the control panels
-     * 3. Swap camera:
-     * 4. Design Initial Position
-     * 5. Change positions
-    * */
-
     const setSkatePosition = (pos, skatePoses) => {
+    
         const modelPos = {
             dynamic: {x:-60, y:-10, z:15},
             front: {x:-90,y:0,z:0},
@@ -61,14 +50,13 @@ export default function sketch (p) {
     p.setup = function () {
         canvas = p.createCanvas(600, 400, p.WEBGL);
         color = [255, 255, 255]; //default
-        texture = p.loadImage(require('./../../assets/starwars_example.jpeg'));
+        texture = p.loadImage(require('./../../assets/Skateboard/uv-map.jpg'));
     };
 
     p.myCustomRedrawAccordingToNewPropsHandler = function (newProps) {
         
         //Initial State 
         setSkatePosition(newProps.skatePosition, newProps.skatePositions);
-
         //Redraw when a prop changes.
         if(canvas){
 
@@ -87,11 +75,13 @@ export default function sketch (p) {
                     break;
                 case newProps.buttonIDs.zoomSlider:
                     console.log("Zoom Change! " + newProps.zoom);
-                    p.camera(0,0,newProps.zoom, 0,0,0, 0,1,0);
+                    p.camera(0,0, newProps.zoom, 0,0,0, 0,1,0);
                     break;
                 case newProps.buttonIDs.viewPanels:
                     console.log("Changed View " + newProps.skatePosition);
-                    setSkatePosition(newProps.skatePosition, newProps.skatePositions);
+                    setSkatePosition(newProps.skatePosition, newProps.skatePositions); 
+                    console.log('Reset Camera!');
+                    p.camera(...newProps.cameraPos);                   
                     break;
                 default:
                     console.log("Error, Default State Reached");
@@ -103,18 +93,29 @@ export default function sketch (p) {
 
     p.draw = function () {
 
-        p.orbitControl(3, 3, 0.03);
         p.background(100);
         p.normalMaterial();
+        p.orbitControl(3, 3, 0.03);
 
         //Initial Position
         p.rotateX(toRadians(skatePos.x));
         p.rotateY(toRadians(skatePos.y));
         p.rotateZ(toRadians(skatePos.z));
+        
+        //Group Translate.
+        //p.translate(100, 0, 0);
 
+        //Individual Skate model
         p.push();
         p.texture(texture);
         p.model(skateModel);
         p.pop();
+
+        //Individual Box1
+        p.push();
+        p.translate(10, 10, 0);
+        p.box(100, 100, 100);
+        p.pop();
+
     };
 };

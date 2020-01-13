@@ -37,9 +37,9 @@ function App() {
 
   //Camera Zoom Properties, TEMP
   const zoomProps = {
-    min: 150,
-    max: 600,
-    default: 600
+    min: 150, //150
+    max: 600, //600
+    default: 0 //600
   }
 
   //State variables
@@ -102,10 +102,10 @@ function App() {
         
         <div>
           <Button onClick={()=>changeSkatePos(skatePositions.DYNAMIC)} variant="secondary">Dynamic</Button>
-          <Button onClick={()=>changeSkatePos(skatePositions.FRONT)} variant="secondary">Front</Button>
           <Button onClick={()=>changeSkatePos(skatePositions.TOP)} variant="secondary">Top</Button>
-          <Button onClick={()=>changeSkatePos(skatePositions.SIDE)} variant="secondary">Side</Button>
           <Button onClick={()=>changeSkatePos(skatePositions.BOTTOM)} variant="secondary">Bottom</Button>
+          <Button onClick={()=>changeSkatePos(skatePositions.FRONT)} variant="secondary">Front</Button>
+          <Button onClick={()=>changeSkatePos(skatePositions.SIDE)} variant="secondary">Side</Button>
         </div>
 
       </div>
