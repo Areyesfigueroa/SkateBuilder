@@ -1,9 +1,12 @@
-.default {
-    border: 0;
-    outline: none;
-    cursor: auto;
+.EditableText {
+    display: flex;
+    justify-content: center;
 }
 
-.edit {
+.EditableText input {
+    width: 350px;
+    text-align: center;
     outline: none;
+    border: 0;
+    border-bottom: 1px solid gray;
 }
