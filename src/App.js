@@ -1,14 +1,16 @@
 import React, {useState} from 'react';
-import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
 
 import Header from './components/Header/Header';
+import EditableText from './components/EditableText/EditableText';
 
 function App() {
 
   return (
     <div className="App">
-      <Header title="Skate Builder" />
+      <Header />
+      <EditableText />
     </div>
   );
 }
