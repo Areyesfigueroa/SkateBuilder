@@ -5,6 +5,7 @@ import './App.css';
 import Header from './components/Header/Header';
 import SectionWrapper from './components/SectionWrapper/SectionWrapper';
 import EditableText from './components/EditableText/EditableText';
+import SketchBuilder from './components/SkateBuilder/SkateBuilder';
 
 function App() {
 
@@ -15,6 +16,8 @@ function App() {
       <SectionWrapper>
         <EditableText placeholderText="My Board..."/>
       </SectionWrapper>
+
+      <SketchBuilder />      
     </div>
   );
 }

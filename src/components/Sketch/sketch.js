@@ -1,10 +1,14 @@
 export default function Sketch (p) {
     let canvas;
-    let texture;
     let skateModel;
-    let color;
-
+    let skateTexture;
     let skatePos;
+
+    /**
+     * 1. Load the board.
+     * 2. Load the texture.
+     * 3. Setup newProps handler.
+     */
 
     const setSkatePosition = (pos, skatePoses) => {
     
@@ -44,51 +48,43 @@ export default function Sketch (p) {
     }
 
     p.preload = function () {
+        //Default Values
         skateModel = p.loadModel(require('./../../assets/Skateboard/skateboard.obj'), true);
     }
 
     p.setup = function () {
+        //Default Values
         canvas = p.createCanvas(600, 400, p.WEBGL);
-        color = [255, 255, 255]; //default
-        texture = p.loadImage(require('./../../assets/Skateboard/uv-map.jpg'));
+        skateTexture = p.loadImage(require('./../../assets/Skateboard/uv-map.jpg'));
     };
 
     p.myCustomRedrawAccordingToNewPropsHandler = function (newProps) {
         
         //Initial State 
-        setSkatePosition(newProps.skatePosition, newProps.skatePositions);
+        //setSkatePosition(newProps.skatePosition, newProps.skatePositions);
         //Redraw when a prop changes.
-        if(canvas){
-
-            switch(newProps.btnCaller){
-                case newProps.buttonIDs.changeColorBtn:
-                    console.log('Color Change!');
-                    color = newProps.color;
-                    break;
-                case newProps.buttonIDs.resetCameraBtn:
-                    console.log('Reset Camera!');
-                    p.camera(...newProps.cameraPos);
-                    break;
-                case newProps.buttonIDs.changeDeckTextureBtn:
-                    console.log("Texture Change!");
-                    texture = p.loadImage(newProps.deckTexture);
-                    break;
-                case newProps.buttonIDs.zoomSlider:
-                    console.log("Zoom Change! " + newProps.zoom);
-                    p.camera(0,0, newProps.zoom, 0,0,0, 0,1,0);
-                    break;
-                case newProps.buttonIDs.viewPanels:
-                    console.log("Changed View " + newProps.skatePosition);
-                    setSkatePosition(newProps.skatePosition, newProps.skatePositions); 
-                    console.log('Reset Camera!');
-                    p.camera(...newProps.cameraPos);                   
-                    break;
-                default:
-                    console.log("Error, Default State Reached");
-            }
-
-        }
-
+        // if(canvas) {
+        //     //console.log("Props Handler");
+        //     //skateTexture = p.loadImage(newProps.skateTexture);
+        //     switch(newProps.btnCaller) {
+        //         case newProps.buttonIDs.resetCameraBtn:
+        //             console.log('Reset Camera!');
+        //             p.camera(...newProps.cameraPos);
+        //             break;
+        //         case newProps.buttonIDs.zoomSlider:
+        //             console.log("Zoom Change! " + newProps.zoom);
+        //             p.camera(0,0, newProps.zoom, 0,0,0, 0,1,0);
+        //             break;
+        //         case newProps.buttonIDs.viewPanels:
+        //             console.log("Changed View " + newProps.skatePosition);
+        //             //setSkatePosition(newProps.skatePosition, newProps.skatePositions); 
+        //             console.log('Reset Camera!');
+        //             //p.camera(...newProps.cameraPos);                   
+        //             break;
+        //         default:
+        //             console.log("Error, Default State Reached");
+        //     }
+        // }
     };
 
     p.draw = function () {
@@ -98,24 +94,19 @@ export default function Sketch (p) {
         p.orbitControl(3, 3, 0.03);
 
         //Initial Position
-        p.rotateX(toRadians(skatePos.x));
-        p.rotateY(toRadians(skatePos.y));
-        p.rotateZ(toRadians(skatePos.z));
+        // p.rotateX(toRadians(skatePos.x));
+        // p.rotateY(toRadians(skatePos.y));
+        // p.rotateZ(toRadians(skatePos.z));
         
         //Group Translate.
         //p.translate(100, 0, 0);
 
         //Individual Skate model
         p.push();
-        p.texture(texture);
+        p.texture(skateTexture);
         p.model(skateModel);
         p.pop();
-
-        //Individual Box1
-        p.push();
-        p.translate(10, 10, 0);
-        p.box(100, 100, 100);
-        p.pop();
-
     };
 };
+
+//myCustomRedrawAccordingToNewPropsHandler
