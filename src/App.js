@@ -16,8 +16,6 @@ function App() {
       <SectionWrapper>
         <EditableText placeholderText="My Board..."/>
       </SectionWrapper>
-
-      <CameraController />
     </div>
   );
 }
