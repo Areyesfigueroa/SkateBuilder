@@ -1,0 +1,8 @@
+.SectionWrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    row-gap: 50px;
+    justify-items: center;
+    margin: 0 120px 30px 120px;
+}

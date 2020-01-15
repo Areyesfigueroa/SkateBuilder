@@ -13,7 +13,7 @@ function Header() {
     const logo = require('./../../assets/Logos/site-logo.png');
 
     return (
-        <Navbar bg="light" expand="lg">
+        <Navbar bg="light" expand="lg" className={classes.Header}>
             <Navbar.Brand href="#home">
                 <Image src={logo} alt={'Logo'} className={classes.logo} fluid={true}/>
             </Navbar.Brand>
