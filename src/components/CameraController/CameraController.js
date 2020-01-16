@@ -6,6 +6,7 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 
 const CameraController = (props) => {
     const btnIDs = {
+        resetBtn: 'resetBtn',
         dynamicBtn: 'dynamicBtn',
         topBtn: 'topBtn',
         bottomBtn: 'bottomBtn',
@@ -23,6 +24,7 @@ const CameraController = (props) => {
     return (
         <div>
             <ButtonGroup>
+                <Button id={btnIDs.resetBtn} onClick={props.click}>Reset</Button>
                 <Button id={btnIDs.dynamicBtn} onClick={props.click}>Dynamic</Button>
                 <Button id={btnIDs.topBtn} onClick={props.click}>Top</Button>
                 <Button id={btnIDs.bottomBtn} onClick={props.click}>Bottom</Button>
@@ -30,12 +32,14 @@ const CameraController = (props) => {
                 <Button id={btnIDs.sideBtn} onClick={props.click}>Side</Button>
             </ButtonGroup>
             <div>
+                <span>Zoom In</span>
                 <input id={btnIDs.zoomSlider} 
                 type="range" 
                 min={zoomProps.min} 
                 max={zoomProps.max} 
                 defaultValue={zoomProps.default} 
                 onChange={props.slider} />
+                <span>Zoom Out</span>
             </div>
         </div>
     );

@@ -4,6 +4,10 @@ export default function Sketch (p) {
     let skateTexture;
     let skatePos;
 
+    //Zoom Variables
+    let zoomPos = 0;
+    let zoomSpeed = 0.05;
+
     /**
      * 1. Load the board.
      * 2. Load the texture.
@@ -59,7 +63,29 @@ export default function Sketch (p) {
     };
 
     p.myCustomRedrawAccordingToNewPropsHandler = function (newProps) {
-        
+        //Init value
+        skatePos = newProps.view;
+
+        if(canvas) {
+            console.log(p._curElement._curCamera);
+            skatePos = newProps.view;
+            
+            p.camera(
+                newProps.cameraCoord[0],
+                newProps.cameraCoord[1],
+                newProps.zoom,
+
+                newProps.cameraCoord[3],
+                newProps.cameraCoord[4],
+                newProps.cameraCoord[5],
+
+                newProps.cameraCoord[6],
+                newProps.cameraCoord[7],
+                newProps.cameraCoord[8]
+                );
+        }
+
+
         //Initial State 
         //setSkatePosition(newProps.skatePosition, newProps.skatePositions);
         //Redraw when a prop changes.
@@ -87,16 +113,44 @@ export default function Sketch (p) {
         // }
     };
 
+    p.mouseWheel = function (event) {
+
+        const maxZoom = 150;
+        const minZoom = 500;
+        const zSpeed = 0.05;
+
+        zoomPos = -p._curElement._curCamera.cameraMatrix.mat4[14]; //invert
+        if(zoomPos < maxZoom) {
+            console.log('too close!, stop moving.');
+            zoomSpeed = 0;
+            zoomPos = 150;
+            if(event.delta > 0) {
+                zoomPos += event.delta;
+                zoomSpeed = zSpeed;
+            }
+        } else if(zoomPos > minZoom) {
+            console.log('too far!, stop moving.');
+            zoomSpeed = 0;
+            zoomPos = 500;
+            if(event.delta < 0) {
+                zoomPos -= event.delta;
+                zoomSpeed = zSpeed;
+            }
+        } else {
+            zoomSpeed = zSpeed;
+        }
+    }
+
     p.draw = function () {
 
         p.background(100);
         p.normalMaterial();
-        p.orbitControl(3, 3, 0.03);
+        p.orbitControl(3, 3, zoomSpeed);
 
         //Initial Position
-        // p.rotateX(toRadians(skatePos.x));
-        // p.rotateY(toRadians(skatePos.y));
-        // p.rotateZ(toRadians(skatePos.z));
+        p.rotateX(toRadians(skatePos.x));
+        p.rotateY(toRadians(skatePos.y));
+        p.rotateZ(toRadians(skatePos.z));
         
         //Group Translate.
         //p.translate(100, 0, 0);

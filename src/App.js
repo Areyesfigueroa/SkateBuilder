@@ -6,7 +6,6 @@ import Header from './components/Header/Header';
 import SectionWrapper from './components/SectionWrapper/SectionWrapper';
 import EditableText from './components/EditableText/EditableText';
 import SketchBuilder from './components/SkateBuilder/SkateBuilder';
-import CameraController from './components/CameraController/CameraController';
 
 function App() {
 
@@ -18,7 +17,7 @@ function App() {
         <EditableText placeholderText="My Board..."/>
       </SectionWrapper>
 
-      <SketchBuilder />      
+      <SketchBuilder />
     </div>
   );
 }
