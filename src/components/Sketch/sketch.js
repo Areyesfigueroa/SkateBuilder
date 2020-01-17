@@ -9,9 +9,7 @@ export default function Sketch (p) {
     let zoomSpeed = 0.05;
 
     /**
-     * 1. Load the board.
-     * 2. Load the texture.
-     * 3. Setup newProps handler.
+     * 1. Set camera 
      */
 
     const setSkatePosition = (pos, skatePoses) => {
@@ -65,14 +63,11 @@ export default function Sketch (p) {
     p.myCustomRedrawAccordingToNewPropsHandler = function (newProps) {
         //Init value
         skatePos = newProps.view;
-
         if(canvas) {
-            console.log(p._curElement._curCamera);
-            skatePos = newProps.view;
-            
+            skatePos = newProps.view;    
             p.camera(
-                newProps.cameraCoord[0],
-                newProps.cameraCoord[1],
+                0,
+                0,
                 newProps.zoom,
 
                 newProps.cameraCoord[3],
@@ -83,6 +78,8 @@ export default function Sketch (p) {
                 newProps.cameraCoord[7],
                 newProps.cameraCoord[8]
                 );
+            //console.log(p._curElement._curCamera);
+
         }
 
 
@@ -113,10 +110,12 @@ export default function Sketch (p) {
         // }
     };
 
+
+
     p.mouseWheel = function (event) {
 
-        const maxZoom = 150;
-        const minZoom = 500;
+        const maxZoom = 160;
+        const minZoom = 600;
         const zSpeed = 0.05;
 
         zoomPos = -p._curElement._curCamera.cameraMatrix.mat4[14]; //invert
@@ -139,6 +138,9 @@ export default function Sketch (p) {
         } else {
             zoomSpeed = zSpeed;
         }
+        //console.log(p._curElement._curCamera.eyeX, p._curElement._curCamera.eyeY);
+       // console.log(p._curElement._curCamera);
+        //console.log(p._curElement._curCamera._getLocalAxes());
     }
 
     p.draw = function () {
@@ -162,5 +164,3 @@ export default function Sketch (p) {
         p.pop();
     };
 };
-
-//myCustomRedrawAccordingToNewPropsHandler

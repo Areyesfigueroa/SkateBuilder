@@ -17,8 +17,8 @@ const CameraController = (props) => {
 
     const zoomProps = {
         default: props.defaultZoom ? props.defaultZoom : 400,
-        min: props.minZoom ? props.minZoom : 200,
-        max: props.maxZoom ? props.maxZoom : 600,
+        min: props.minZoom ? props.minZoom : 150,
+        max: props.maxZoom ? props.maxZoom : 800,
     }
 
     return (

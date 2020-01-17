@@ -70,7 +70,7 @@ const SkateBuilder = () => {
         }
     }
 
-    const handleSlide = (event) => {
+    const sliderHandler = (event) => {
         setZoom(event.target.value);
     }
 
@@ -83,29 +83,13 @@ const SkateBuilder = () => {
                 view={view}
                 zoom={zoom}
             />
+
             <CameraController 
             click={cameraHandler}
-            slider={handleSlide}
+            slider={sliderHandler}
             />
         </div>
     );
 };
 
 export default SkateBuilder;
-
-    // const resetCameraHandler = (event, coord = [0, 0, 350, 0, 0, 0, 0, 1, 0]) => {
-    //     setBtnCaller(event.target.id);
-    //     setCameraCoord(coord);
-    // }
-    // const skateTextureHandler = (event, texture) => {
-    //     setBtnCaller(event.target.id);
-    //     setSkateTexture(texture);
-    // }
-    // const zoomSliderHandler = (event) => {
-    //     setBtnCaller(event.target.id);
-    //     setZoom(event.target.value);
-    // }
-    // const changeSkatePos = (position) => {
-    //     setBtnCaller(buttonIDs.viewPanels);
-    //     setSkatePosition(position);
-    // }
