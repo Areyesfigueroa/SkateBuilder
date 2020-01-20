@@ -17,7 +17,9 @@ function App() {
         <EditableText placeholderText="My Board..."/>
       </SectionWrapper>
 
-      <SketchBuilder />
+      <SectionWrapper>
+        <SketchBuilder />
+      </SectionWrapper>
     </div>
   );
 }

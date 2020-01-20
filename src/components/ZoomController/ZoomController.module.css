@@ -1,0 +1,15 @@
+.ZoomController {
+    grid-area: zoom-controller;
+    width: 100%;
+}
+
+.ZoomController input {
+    width: 70%;
+}
+
+.ZoomController span:first-child {
+    margin-right: 20px;
+}
+.ZoomController span:last-child {
+    margin-left: 20px;
+}

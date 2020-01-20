@@ -1,3 +1,4 @@
+import '../SkateBuilder/SkateBuilder.module.css';
 export default function Sketch (p) {
     let canvas;
     let skateModel;
@@ -7,43 +8,6 @@ export default function Sketch (p) {
     //Zoom Variables
     let zoomPos = 0;
     let zoomSpeed = 0.05;
-
-    /**
-     * 1. Set camera 
-     */
-
-    const setSkatePosition = (pos, skatePoses) => {
-    
-        const modelPos = {
-            dynamic: {x:-60, y:-10, z:15},
-            front: {x:-90,y:0,z:0},
-            side: {x:-90,y:0,z:90},
-            top: {x:0,y:180,z:0},
-            bottom: {x:0,y:0,z:0}
-        };
-
-        switch(pos) {
-            case skatePoses.DYNAMIC:
-                skatePos = {...modelPos.dynamic};
-                break;
-            case skatePoses.FRONT:
-                skatePos = {...modelPos.front};
-                break;
-            case skatePoses.SIDE:
-                skatePos = {...modelPos.side};
-                break;
-            case skatePoses.TOP:
-                skatePos = {...modelPos.top};
-                break;
-            case skatePoses.BOTTOM:
-                skatePos = {...modelPos.bottom};
-                break;
-            default:
-                console.log('No Position Chosen');
-        }
-
-        return skatePos;
-    }
 
     const toRadians = function (x) {
         return x * Math.PI/180;
@@ -58,6 +22,7 @@ export default function Sketch (p) {
         //Default Values
         canvas = p.createCanvas(600, 400, p.WEBGL);
         skateTexture = p.loadImage(require('./../../assets/Skateboard/uv-map.jpg'));
+        canvas.elt.classList.add('sketch');
     };
 
     p.myCustomRedrawAccordingToNewPropsHandler = function (newProps) {
@@ -78,39 +43,8 @@ export default function Sketch (p) {
                 newProps.cameraCoord[7],
                 newProps.cameraCoord[8]
                 );
-            //console.log(p._curElement._curCamera);
-
         }
-
-
-        //Initial State 
-        //setSkatePosition(newProps.skatePosition, newProps.skatePositions);
-        //Redraw when a prop changes.
-        // if(canvas) {
-        //     //console.log("Props Handler");
-        //     //skateTexture = p.loadImage(newProps.skateTexture);
-        //     switch(newProps.btnCaller) {
-        //         case newProps.buttonIDs.resetCameraBtn:
-        //             console.log('Reset Camera!');
-        //             p.camera(...newProps.cameraPos);
-        //             break;
-        //         case newProps.buttonIDs.zoomSlider:
-        //             console.log("Zoom Change! " + newProps.zoom);
-        //             p.camera(0,0, newProps.zoom, 0,0,0, 0,1,0);
-        //             break;
-        //         case newProps.buttonIDs.viewPanels:
-        //             console.log("Changed View " + newProps.skatePosition);
-        //             //setSkatePosition(newProps.skatePosition, newProps.skatePositions); 
-        //             console.log('Reset Camera!');
-        //             //p.camera(...newProps.cameraPos);                   
-        //             break;
-        //         default:
-        //             console.log("Error, Default State Reached");
-        //     }
-        // }
     };
-
-
 
     p.mouseWheel = function (event) {
 
@@ -164,3 +98,29 @@ export default function Sketch (p) {
         p.pop();
     };
 };
+
+        //Initial State 
+        //setSkatePosition(newProps.skatePosition, newProps.skatePositions);
+        //Redraw when a prop changes.
+        // if(canvas) {
+        //     //console.log("Props Handler");
+        //     //skateTexture = p.loadImage(newProps.skateTexture);
+        //     switch(newProps.btnCaller) {
+        //         case newProps.buttonIDs.resetCameraBtn:
+        //             console.log('Reset Camera!');
+        //             p.camera(...newProps.cameraPos);
+        //             break;
+        //         case newProps.buttonIDs.zoomSlider:
+        //             console.log("Zoom Change! " + newProps.zoom);
+        //             p.camera(0,0, newProps.zoom, 0,0,0, 0,1,0);
+        //             break;
+        //         case newProps.buttonIDs.viewPanels:
+        //             console.log("Changed View " + newProps.skatePosition);
+        //             //setSkatePosition(newProps.skatePosition, newProps.skatePositions); 
+        //             console.log('Reset Camera!');
+        //             //p.camera(...newProps.cameraPos);                   
+        //             break;
+        //         default:
+        //             console.log("Error, Default State Reached");
+        //     }
+        // }

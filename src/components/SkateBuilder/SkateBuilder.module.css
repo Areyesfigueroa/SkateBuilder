@@ -1,3 +1,16 @@
 .SkateBuilder {
     width: 100%;
+    display: grid;
+    grid-template-columns: 600px 1fr;
+    grid-template-rows: auto;
+    grid-template-areas: 
+    "sketch ."
+    "camera-controller ."
+    "zoom-controller .";
+
+    justify-items: start;
+}
+
+.sketch {
+    grid-area: sketch;
 }

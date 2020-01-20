@@ -4,6 +4,7 @@ import classes from './SkateBuilder.module.css';
 import Sketch from '../Sketch/sketch';
 import P5Wrapper from 'react-p5-wrapper';
 import CameraController from './../CameraController/CameraController';
+import ZoomController from './../ZoomController/ZoomController';
 /**
  * TODO:
  * 1. Add cameracontroller.
@@ -55,9 +56,9 @@ const SkateBuilder = () => {
     }
 
     //State variables
+    //const [btnCaller, setBtnCaller] = useState(null);
+    //const [skateTexture, setSkateTexture] = useState(require('./../../assets/Skateboard/uv-map.jpg'));
     const [cameraCoord, setCameraCoord] = useState([0, 0, 350, 0, 0, 0, 0, 1, 0]);
-    const [btnCaller, setBtnCaller] = useState(null);
-    const [skateTexture, setSkateTexture] = useState(require('./../../assets/Skateboard/uv-map.jpg'));
     const [zoom, setZoom] = useState(400);
     const [view, setView] = useState(getViewCoord(viewStates.FRONT, viewStates));
 
@@ -74,20 +75,23 @@ const SkateBuilder = () => {
         setZoom(event.target.value);
     }
 
+
     return (
         <div className={classes.SkateBuilder}>
             <P5Wrapper
-                sketch={Sketch}
-                skateTexture={require('./../../assets/Skateboard/textura.png')}
-                cameraCoord={cameraCoord}
-                view={view}
-                zoom={zoom}
+            sketch={Sketch}
+            skateTexture={require('./../../assets/Skateboard/textura.png')}
+            cameraCoord={cameraCoord}
+            view={view}
+            zoom={zoom}
             />
 
-            <CameraController 
+            <CameraController
+            style={classes.cameraController}
             click={cameraHandler}
-            slider={sliderHandler}
             />
+            
+            <ZoomController slider={sliderHandler}/>
         </div>
     );
 };

@@ -1,0 +1,8 @@
+.CameraController {
+    grid-area: camera-controller;
+    width: 100%;
+}
+
+.CameraController div {
+    width: 100%;
+}
