@@ -1,9 +1,11 @@
 import './sketch.css';
 export default function Sketch (p) {
     let canvas;
-    let skateModel;
-    let skateTexture;
     let skatePos;
+
+    //Skate Obj Variables
+    let deckBottomObj, deckMiddleObj, deckTopObj, truckObj, wheelObj;
+    let deckBottomTexture, deckMiddleTexture, deckTopTexture, truckTexture, wheelTexture;
 
     //Zoom Variables
     let zoomPos = 0;
@@ -14,8 +16,13 @@ export default function Sketch (p) {
     }
 
     p.preload = function () {
-        //Default Values
-        skateModel = p.loadModel(require('./../../assets/Skateboard/skateboard.obj'), true);
+        //Skate Obj Models
+        deckBottomObj = p.loadModel(require('./../../assets/SkateboardObjs/DECK_BOTTOM.obj'), true);
+        deckMiddleObj = p.loadModel(require('./../../assets/SkateboardObjs/DECK_MIDDLE.obj'), true);
+        deckTopObj = p.loadModel(require('./../../assets/SkateboardObjs/DECK_TOP.obj'), true);
+        truckObj = p.loadModel(require('./../../assets/SkateboardObjs/TRUCK.obj'), true);
+        wheelObj = p.loadModel(require('./../../assets/SkateboardObjs/WHEEL.obj'), true);
+
     }
 
     p.setup = function () {
@@ -24,7 +31,12 @@ export default function Sketch (p) {
         canvas.elt.parentElement.classList.add('sketch');
         canvas.elt.style.cssText=`visibility: hidden; width: 100%; height: 400px;`;
         
-        skateTexture = p.loadImage(require('./../../assets/Skateboard/uv-map.jpg'));
+        //Skate Obj Models
+        deckBottomTexture = p.loadImage(require('./../../assets/SkateboardTextures/starwars_example.jpeg'));
+        deckMiddleTexture = p.loadImage(require('./../../assets/SkateboardTextures/uv-map.jpg'));
+        deckTopTexture = p.loadImage(require('./../../assets/SkateboardTextures/lixa.jpg'));
+        truckTexture = p.loadImage(require('./../../assets/SkateboardTextures/volcom-truck-texture.jpg'));
+        wheelTexture = p.loadImage(require('./../../assets/SkateboardTextures/wheels-texture.jpg'));
     };
 
     p.myCustomRedrawAccordingToNewPropsHandler = function (newProps) {
@@ -85,7 +97,7 @@ export default function Sketch (p) {
         p.normalMaterial();
         p.orbitControl(3, 3, zoomSpeed);
 
-        //Initial Position
+        //Group Rotate
         p.rotateX(toRadians(skatePos.x));
         p.rotateY(toRadians(skatePos.y));
         p.rotateZ(toRadians(skatePos.z));
@@ -93,10 +105,41 @@ export default function Sketch (p) {
         //Group Translate.
         //p.translate(100, 0, 0);
 
-        //Individual Skate model
+        //Group Texture
+        //p.texture(skateTexture);
+
+        //Deck Bottom Model
         p.push();
-        p.texture(skateTexture);
-        p.model(skateModel);
+        p.texture(deckBottomTexture);
+        p.model(deckBottomObj);
+        p.pop();
+
+        //Deck Middle
+        p.push();
+        p.texture(deckMiddleTexture);
+        p.model(deckMiddleObj);
+        p.pop();
+
+        //Deck Top
+        p.push();
+        p.texture(deckTopTexture);
+        p.model(deckTopObj);
+        p.pop();
+
+        //Trucks
+        p.push();
+        p.translate(0,-15,0);
+        p.scale(0.9);
+        p.texture(truckTexture);
+        p.model(truckObj);
+        p.pop();
+
+        //Wheels
+        p.push();
+        p.translate(0,-15,0);
+        p.scale(0.9);
+        p.texture(wheelTexture);
+        p.model(wheelObj);
         p.pop();
     };
 };
