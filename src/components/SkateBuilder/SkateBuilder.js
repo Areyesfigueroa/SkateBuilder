@@ -5,6 +5,7 @@ import Sketch from '../Sketch/sketch';
 import P5Wrapper from 'react-p5-wrapper';
 import CameraController from './../CameraController/CameraController';
 import ZoomController from './../ZoomController/ZoomController';
+import ButtonController from './../ButtonController/ButtonController';
 /**
  * TODO:
  * 1. Add cameracontroller.
@@ -78,6 +79,18 @@ const SkateBuilder = () => {
 
     return (
         <div className={classes.SkateBuilder}>
+            
+            <div className={classes.buttonControllers}>
+                <ButtonController 
+                btn1Name='Save to MyBoards' 
+                btn2Name='Add to cart'
+                />
+                <ButtonController 
+                btn1Name='3D' 
+                btn2Name='2D'
+                />
+            </div>
+
             <P5Wrapper
             sketch={Sketch}
             skateTexture={require('./../../assets/Skateboard/textura.png')}
@@ -90,7 +103,7 @@ const SkateBuilder = () => {
             style={classes.cameraController}
             click={cameraHandler}
             />
-            
+
             <ZoomController slider={sliderHandler}/>
         </div>
     );

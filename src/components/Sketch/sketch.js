@@ -1,4 +1,4 @@
-import '../SkateBuilder/SkateBuilder.module.css';
+import './sketch.css';
 export default function Sketch (p) {
     let canvas;
     let skateModel;
@@ -21,8 +21,10 @@ export default function Sketch (p) {
     p.setup = function () {
         //Default Values
         canvas = p.createCanvas(600, 400, p.WEBGL);
+        canvas.elt.parentElement.classList.add('sketch');
+        canvas.elt.style.cssText=`visibility: hidden; width: 100%; height: 400px;`;
+        
         skateTexture = p.loadImage(require('./../../assets/Skateboard/uv-map.jpg'));
-        canvas.elt.classList.add('sketch');
     };
 
     p.myCustomRedrawAccordingToNewPropsHandler = function (newProps) {

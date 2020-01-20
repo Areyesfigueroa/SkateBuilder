@@ -1,0 +1,7 @@
+.sketch {
+    grid-area: sketch;
+    position: relative;
+    width: 100%;
+    min-width: 550px;
+    height: 400px;
+}
