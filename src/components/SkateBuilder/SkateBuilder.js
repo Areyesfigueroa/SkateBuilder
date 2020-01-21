@@ -12,56 +12,52 @@ import ButtonController from './../ButtonController/ButtonController';
  * 2. Add cameracontroller click handler.
  */
 
+const viewStates = {
+    RESET: "reset",
+    DYNAMIC: "dynamic",
+    FRONT: 'front',
+    SIDE: 'side',
+    TOP: 'top',
+    BOTTOM: 'bottom'
+}
+const getViewCoord = (viewState, viewStates) => {
+
+    const coordinates = {
+        dynamic: {x:140, y:0, z:-15},
+        front: {x:90,y:0,z:0},
+        side: {x:90,y:0,z:-90},
+        top: {x:0,y:0,z:0},
+        bottom: {x:0,y:-180,z:0}
+    };
+    
+    let viewCoord;
+    switch(viewState) {
+        case viewStates.DYNAMIC:
+            viewCoord = {...coordinates.dynamic};
+            break;
+        case viewStates.FRONT:
+            viewCoord = {...coordinates.front};
+            break;
+        case viewStates.SIDE:
+            viewCoord = {...coordinates.side};
+            break;
+        case viewStates.TOP:
+            viewCoord = {...coordinates.top};
+            break;
+        case viewStates.BOTTOM:
+            viewCoord = {...coordinates.bottom};
+            break;
+        default:
+            viewCoord = {...coordinates.dynamic};
+    }
+    return viewCoord
+}
+
 const SkateBuilder = () => {
 
-    const viewStates = {
-        RESET: "reset",
-        DYNAMIC: "dynamic",
-        FRONT: 'front',
-        SIDE: 'side',
-        TOP: 'top',
-        BOTTOM: 'bottom'
-    }
-
-    const getViewCoord = (viewState, viewStates) => {
-
-        const coordinates = {
-            dynamic: {x:-60, y:-10, z:15},
-            front: {x:-90,y:0,z:0},
-            side: {x:-90,y:0,z:90},
-            top: {x:0,y:180,z:0},
-            bottom: {x:0,y:0,z:0}
-        };
-        
-        let viewCoord;
-        switch(viewState) {
-            case viewStates.DYNAMIC:
-                viewCoord = {...coordinates.dynamic};
-                break;
-            case viewStates.FRONT:
-                viewCoord = {...coordinates.front};
-                break;
-            case viewStates.SIDE:
-                viewCoord = {...coordinates.side};
-                break;
-            case viewStates.TOP:
-                viewCoord = {...coordinates.top};
-                break;
-            case viewStates.BOTTOM:
-                viewCoord = {...coordinates.bottom};
-                break;
-            default:
-                viewCoord = {...coordinates.dynamic};
-        }
-        return viewCoord
-    }
-
-    //State variables
-    //const [btnCaller, setBtnCaller] = useState(null);
-    //const [skateTexture, setSkateTexture] = useState(require('./../../assets/Skateboard/uv-map.jpg'));
     const [cameraCoord, setCameraCoord] = useState([0, 0, 350, 0, 0, 0, 0, 1, 0]);
     const [zoom, setZoom] = useState(400);
-    const [view, setView] = useState(getViewCoord(viewStates.FRONT, viewStates));
+    const [view, setView] = useState(getViewCoord(viewStates.DYNAMIC, viewStates));
 
     const cameraHandler = (event) => {
         const viewState = event.target.id.replace('Btn', '');
@@ -71,11 +67,6 @@ const SkateBuilder = () => {
             setView(getViewCoord(viewState, viewStates));
         }
     }
-
-    const sliderHandler = (event) => {
-        setZoom(event.target.value);
-    }
-
 
     return (
         <div className={classes.SkateBuilder}>
@@ -104,7 +95,7 @@ const SkateBuilder = () => {
             click={cameraHandler}
             />
 
-            <ZoomController slider={sliderHandler}/>
+            <ZoomController slider={(event) => setZoom(event.target.value) }/>
         </div>
     );
 };

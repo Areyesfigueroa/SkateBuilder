@@ -86,9 +86,6 @@ export default function Sketch (p) {
         } else {
             zoomSpeed = zSpeed;
         }
-        //console.log(p._curElement._curCamera.eyeX, p._curElement._curCamera.eyeY);
-       // console.log(p._curElement._curCamera);
-        //console.log(p._curElement._curCamera._getLocalAxes());
     }
 
     p.draw = function () {
@@ -103,7 +100,7 @@ export default function Sketch (p) {
         p.rotateZ(toRadians(skatePos.z));
         
         //Group Translate.
-        //p.translate(100, 0, 0);
+        p.translate(0, 0, 0);
 
         //Group Texture
         //p.texture(skateTexture);
@@ -141,31 +138,7 @@ export default function Sketch (p) {
         p.texture(wheelTexture);
         p.model(wheelObj);
         p.pop();
+
+        console.log(deckTopObj);
     };
 };
-
-        //Initial State 
-        //setSkatePosition(newProps.skatePosition, newProps.skatePositions);
-        //Redraw when a prop changes.
-        // if(canvas) {
-        //     //console.log("Props Handler");
-        //     //skateTexture = p.loadImage(newProps.skateTexture);
-        //     switch(newProps.btnCaller) {
-        //         case newProps.buttonIDs.resetCameraBtn:
-        //             console.log('Reset Camera!');
-        //             p.camera(...newProps.cameraPos);
-        //             break;
-        //         case newProps.buttonIDs.zoomSlider:
-        //             console.log("Zoom Change! " + newProps.zoom);
-        //             p.camera(0,0, newProps.zoom, 0,0,0, 0,1,0);
-        //             break;
-        //         case newProps.buttonIDs.viewPanels:
-        //             console.log("Changed View " + newProps.skatePosition);
-        //             //setSkatePosition(newProps.skatePosition, newProps.skatePositions); 
-        //             console.log('Reset Camera!');
-        //             //p.camera(...newProps.cameraPos);                   
-        //             break;
-        //         default:
-        //             console.log("Error, Default State Reached");
-        //     }
-        // }
