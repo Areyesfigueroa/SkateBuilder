@@ -20,10 +20,16 @@ const viewStates = {
     TOP: 'top',
     BOTTOM: 'bottom'
 }
+
+const zoomProperties = {
+    MIN: 150,
+    MAX: 800
+}
+
 const getViewCoord = (viewState, viewStates) => {
 
     const coordinates = {
-        dynamic: {x:140, y:0, z:-15},
+        dynamic: {x:130, y:0, z:160},
         front: {x:90,y:0,z:0},
         side: {x:90,y:0,z:-90},
         top: {x:0,y:0,z:0},
@@ -56,7 +62,7 @@ const getViewCoord = (viewState, viewStates) => {
 const SkateBuilder = () => {
 
     const [cameraCoord, setCameraCoord] = useState([0, 0, 350, 0, 0, 0, 0, 1, 0]);
-    const [zoom, setZoom] = useState(400);
+    const [zoom, setZoom] = useState(300);
     const [view, setView] = useState(getViewCoord(viewStates.DYNAMIC, viewStates));
 
     const cameraHandler = (event) => {
@@ -95,7 +101,12 @@ const SkateBuilder = () => {
             click={cameraHandler}
             />
 
-            <ZoomController slider={(event) => setZoom(event.target.value) }/>
+            <ZoomController 
+            slider={(event) => setZoom(event.target.value)}
+            default={zoom}
+            min={zoomProperties.MIN}
+            max={zoomProperties.MAX}
+            />
         </div>
     );
 };

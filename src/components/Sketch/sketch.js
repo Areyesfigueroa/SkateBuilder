@@ -31,17 +31,21 @@ export default function Sketch (p) {
         canvas.elt.parentElement.classList.add('sketch');
         canvas.elt.style.cssText=`visibility: hidden; width: 100%; height: 400px;`;
         
-        //Skate Obj Models
-        deckBottomTexture = p.loadImage(require('./../../assets/SkateboardTextures/starwars_example.jpeg'));
-        deckMiddleTexture = p.loadImage(require('./../../assets/SkateboardTextures/uv-map.jpg'));
-        deckTopTexture = p.loadImage(require('./../../assets/SkateboardTextures/lixa.jpg'));
-        truckTexture = p.loadImage(require('./../../assets/SkateboardTextures/volcom-truck-texture.jpg'));
+        //Camera Default
+        p.camera(0, 0, zoomPos, 0, 0, 0, 0, 1, 0);
+
+        //Skate Textures
+        deckBottomTexture = p.loadImage(require('./../../assets/SkateboardTextures/deck_bottom_001.jpg'));
+        deckMiddleTexture = p.loadImage(require('./../../assets/SkateboardTextures/deck_middle_001.jpg'));
+        deckTopTexture = p.loadImage(require('./../../assets/SkateboardTextures/deck_top_001.jpg'));
+        truckTexture = p.loadImage(require('./../../assets/SkateboardTextures/trucks_002.jpg'));
         wheelTexture = p.loadImage(require('./../../assets/SkateboardTextures/wheels-texture.jpg'));
     };
 
     p.myCustomRedrawAccordingToNewPropsHandler = function (newProps) {
         //Init value
         skatePos = newProps.view;
+        zoomPos = newProps.zoom;
         if(canvas) {
             skatePos = newProps.view;    
             p.camera(
@@ -119,26 +123,25 @@ export default function Sketch (p) {
 
         //Deck Top
         p.push();
+        p.translate(0, 0, 1);
         p.texture(deckTopTexture);
         p.model(deckTopObj);
         p.pop();
 
         //Trucks
         p.push();
-        p.translate(0,-15,0);
-        p.scale(0.9);
+        p.translate(0,0,-13);
+        p.scale(0.8);
         p.texture(truckTexture);
         p.model(truckObj);
         p.pop();
 
         //Wheels
         p.push();
-        p.translate(0,-15,0);
-        p.scale(0.9);
+        p.translate(0,0,-18);
+        p.scale(0.77 );
         p.texture(wheelTexture);
         p.model(wheelObj);
         p.pop();
-
-        console.log(deckTopObj);
     };
 };
