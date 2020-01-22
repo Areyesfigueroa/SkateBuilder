@@ -19,7 +19,7 @@ function App() {
 
       <SectionWrapper>
         <SketchBuilder />
-      </SectionWrapper>
+      </SectionWrapper>      
     </div>
   );
 }

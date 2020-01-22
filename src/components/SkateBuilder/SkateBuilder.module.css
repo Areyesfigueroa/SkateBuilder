@@ -2,12 +2,12 @@
     width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto;
+    grid-template-rows: 38px 400px 38px 38px;
     grid-template-areas: 
-    "buttonControllers ."
-    "sketch ."
-    "camera-controller ."
-    "zoom-controller .";
+    "button-controllers gallery-controllers"
+    "sketch gallery-controllers"
+    "camera-controller gallery-controllers"
+    "zoom-controller gallery-controllers";
 
     justify-items: start;
 }
@@ -17,8 +17,15 @@
 }
 
 .buttonControllers {
-    grid-area: buttonControllers;
+    grid-area: button-controllers;
     display: flex;
     width: 100%;
     justify-content: space-between;
+}
+
+.galleryControllers {
+    grid-area: gallery-controllers;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
 }

@@ -1,9 +1,12 @@
 import React from 'react';
+import classes from './GalleryController.module.css';
 
-const GalleryController = () => {
+import GalleryItems from './GalleryItems/GalleryItems';
+
+const GalleryController = (props) => {
     return (
-        <div>
-            
+        <div className={classes.GalleryController}>
+            <GalleryItems type={props.type} instances={props.instances}/>
         </div>
     );
 };

@@ -2,6 +2,7 @@
     grid-area: sketch;
     position: relative;
     width: 100%;
-    min-width: 550px;
+    min-width: 600px;
+    max-width: 900px;
     height: 400px;
 }

@@ -27,7 +27,7 @@ export default function Sketch (p) {
 
     p.setup = function () {
         //Default Values
-        canvas = p.createCanvas(600, 400, p.WEBGL);
+        canvas = p.createCanvas(900, 400, p.WEBGL);
         canvas.elt.parentElement.classList.add('sketch');
         canvas.elt.style.cssText=`visibility: hidden; width: 100%; height: 400px;`;
         
@@ -37,9 +37,9 @@ export default function Sketch (p) {
         //Skate Textures
         deckBottomTexture = p.loadImage(require('./../../assets/SkateboardTextures/deck_bottom_001.jpg'));
         deckMiddleTexture = p.loadImage(require('./../../assets/SkateboardTextures/deck_middle_001.jpg'));
-        deckTopTexture = p.loadImage(require('./../../assets/SkateboardTextures/deck_top_001.jpg'));
+        deckTopTexture = p.loadImage(require('./../../assets/SkateboardTextures/deck_top_002.jpg'));
         truckTexture = p.loadImage(require('./../../assets/SkateboardTextures/trucks_002.jpg'));
-        wheelTexture = p.loadImage(require('./../../assets/SkateboardTextures/wheels-texture.jpg'));
+        wheelTexture = p.loadImage(require('./../../assets/SkateboardTextures/wheels_002.jpg'));
     };
 
     p.myCustomRedrawAccordingToNewPropsHandler = function (newProps) {

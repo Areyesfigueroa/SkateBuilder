@@ -1,0 +1,8 @@
+.GalleryController {
+    display: flex;
+    width: 100%;
+}
+
+.GalleryController Button {
+    width: 100%;
+}

@@ -3,9 +3,12 @@ import classes from './SkateBuilder.module.css';
 
 import Sketch from '../Sketch/sketch';
 import P5Wrapper from 'react-p5-wrapper';
+
+//Controllers
 import CameraController from './../CameraController/CameraController';
 import ZoomController from './../ZoomController/ZoomController';
 import ButtonController from './../ButtonController/ButtonController';
+import GalleryController from './../GalleryController/GalleryController';
 /**
  * TODO:
  * 1. Add cameracontroller.
@@ -88,6 +91,7 @@ const SkateBuilder = () => {
                 />
             </div>
 
+            {/* Left Hand Side */}
             <P5Wrapper
             sketch={Sketch}
             skateTexture={require('./../../assets/Skateboard/textura.png')}
@@ -107,6 +111,14 @@ const SkateBuilder = () => {
             min={zoomProperties.MIN}
             max={zoomProperties.MAX}
             />
+
+            {/* Right Hand Side */}
+            <div className={classes.galleryControllers}>
+                <GalleryController type={'deck_bottom'} instances={['001', '002']}/>
+                <GalleryController type={'deck_top'} instances={['001', '002']}/>
+                <GalleryController type={'trucks'} instances={['001', '002']}/>
+                <GalleryController type={'wheels'} instances={['001', '002']}/>
+            </div>
         </div>
     );
 };
