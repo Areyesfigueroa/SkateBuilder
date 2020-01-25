@@ -7,7 +7,7 @@ import Button from 'react-bootstrap/Button';
 const GalleryItem = (props) => {
     return (
         <div className={classes.GalleryItem}>
-            <Button variant="outline-secondary">
+            <Button id={props.imageName} variant="outline-secondary" onClick={props.click}>
                 <Image src={require(`./../../../../assets/SkateboardTextures/${props.imageName}.jpg`)} fluid thumbnail/>
             </Button>
         </div>

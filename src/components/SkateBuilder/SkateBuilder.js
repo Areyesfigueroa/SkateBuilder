@@ -11,8 +11,7 @@ import ButtonController from './../ButtonController/ButtonController';
 import GalleryController from './../GalleryController/GalleryController';
 /**
  * TODO:
- * 1. Add cameracontroller.
- * 2. Add cameracontroller click handler.
+ * 1. Change the board to the selected texture. 
  */
 
 const viewStates = {
@@ -27,6 +26,29 @@ const viewStates = {
 const zoomProperties = {
     MIN: 150,
     MAX: 800
+}
+
+const galleryCount = {
+    'deck_bottom': 3,
+    'deck_top': 2,
+    'deck_middle': 2,
+    'trucks': 4,
+    'wheels': 2
+}
+
+
+const generateGalleryInstanceArr = (instanceCount) => {
+    let instanceArr = [];
+    for(let i=1; i <= instanceCount; i++) {
+        if(i < 10) {
+            instanceArr.push(`00${i}`);
+        } else if (i >= 10 && i < 100) {
+            instanceArr.push(`0${i}`);
+        } else if(i >= 100) {
+            instanceArr.push(`${i}`);
+        }
+    }
+    return instanceArr;
 }
 
 const getViewCoord = (viewState, viewStates) => {
@@ -64,9 +86,40 @@ const getViewCoord = (viewState, viewStates) => {
 
 const SkateBuilder = () => {
 
+
     const [cameraCoord, setCameraCoord] = useState([0, 0, 350, 0, 0, 0, 0, 1, 0]);
     const [zoom, setZoom] = useState(300);
     const [view, setView] = useState(getViewCoord(viewStates.DYNAMIC, viewStates));
+    const [deckBottom, setDeckBottom] = useState('deck_bottom_001');
+    const [deckTop, setDeckTop] = useState('deck_top_001');
+    const [deckMiddle, setDeckMiddle] = useState('deck_middle_001');
+    const [trucks, setTrucks] = useState('trucks_001');
+    const [wheels, setWheels] = useState('wheels_001');
+
+    const galleryHandler = (event) => {
+        const btnID = event.target.closest('button').id;
+        const btnCategory = event.target.closest('button').id.slice(0, btnID.length - 4);
+
+        switch(btnCategory) {
+            case 'deck_bottom':
+                setDeckBottom(btnID);
+                break;
+            case 'deck_top':
+                setDeckTop(btnID);
+                break;
+            case 'deck_middle':
+                setDeckMiddle(btnID);
+                break;
+            case 'trucks':
+                setTrucks(btnID);
+                break;
+            case 'wheels':
+                setWheels(btnID);
+                break;
+            default:
+                console.log('No Category Matched');
+        }
+    }
 
     const cameraHandler = (event) => {
         const viewState = event.target.id.replace('Btn', '');
@@ -98,6 +151,11 @@ const SkateBuilder = () => {
             cameraCoord={cameraCoord}
             view={view}
             zoom={zoom}
+            deckTop={deckTop}
+            deckMiddle={deckMiddle}
+            deckBottom={deckBottom}
+            trucks={trucks}
+            wheels={wheels}
             />
 
             <CameraController
@@ -114,10 +172,26 @@ const SkateBuilder = () => {
 
             {/* Right Hand Side */}
             <div className={classes.galleryControllers}>
-                <GalleryController type={'deck_bottom'} instances={['001', '002']}/>
-                <GalleryController type={'deck_top'} instances={['001', '002']}/>
-                <GalleryController type={'trucks'} instances={['001', '002']}/>
-                <GalleryController type={'wheels'} instances={['001', '002']}/>
+                <GalleryController 
+                type={'deck_bottom'} 
+                instances={generateGalleryInstanceArr(galleryCount['deck_bottom'])}
+                click={galleryHandler}
+                />
+                <GalleryController 
+                type={'deck_top'} 
+                instances={generateGalleryInstanceArr(galleryCount['deck_top'])}
+                click={galleryHandler}
+                />
+                <GalleryController 
+                type={'trucks'} 
+                instances={generateGalleryInstanceArr(galleryCount['trucks'])}
+                click={galleryHandler}
+                />
+                <GalleryController 
+                type={'wheels'} 
+                instances={generateGalleryInstanceArr(galleryCount['wheels'])}
+                click={galleryHandler}
+                />
             </div>
         </div>
     );

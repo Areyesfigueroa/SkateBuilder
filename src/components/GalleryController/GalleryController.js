@@ -6,7 +6,7 @@ import GalleryItems from './GalleryItems/GalleryItems';
 const GalleryController = (props) => {
     return (
         <div className={classes.GalleryController}>
-            <GalleryItems type={props.type} instances={props.instances}/>
+            <GalleryItems type={props.type} instances={props.instances} click={props.click}/>
         </div>
     );
 };

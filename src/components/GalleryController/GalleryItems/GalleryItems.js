@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 
 import GalleryItem from './GalleryItem/GalleryItem';
 
@@ -14,6 +14,7 @@ const GalleryItems = (props) => {
         <GalleryItem 
         key={`${props.type}_${el}`}
         imageName={`${props.type}_${el}`}
+        click={props.click}
         />
     ));
 };
