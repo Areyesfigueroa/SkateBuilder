@@ -4,6 +4,7 @@ export default function Sketch (p) {
     let skatePos;
 
     //Skate Obj Variables
+    let runOnce = true;
     let deckBottomObj, deckMiddleObj, deckTopObj, truckObj, wheelObj;
     let deckBottomTexture, deckMiddleTexture, deckTopTexture, truckTexture, wheelTexture;
 
@@ -33,19 +34,29 @@ export default function Sketch (p) {
         
         //Camera Default
         p.camera(0, 0, zoomPos, 0, 0, 0, 0, 1, 0);
-
-        //Skate Textures
-        deckBottomTexture = p.loadImage(require('./../../assets/SkateboardTextures/deck_bottom_003.jpg'));
-        deckMiddleTexture = p.loadImage(require('./../../assets/SkateboardTextures/deck_middle_001.jpg'));
-        deckTopTexture = p.loadImage(require('./../../assets/SkateboardTextures/deck_top_002.jpg'));
-        truckTexture = p.loadImage(require('./../../assets/SkateboardTextures/trucks_004.jpg'));
-        wheelTexture = p.loadImage(require('./../../assets/SkateboardTextures/wheels_002.jpg'));
     };
 
+    //TESTING
+    const renderTextures = (newProps) => {
+        deckBottomTexture = p.loadImage(require(`./../../assets/SkateboardTextures/${newProps.deckBottom}.jpg`));
+        deckTopTexture = p.loadImage(require(`./../../assets/SkateboardTextures/${newProps.deckTop}.jpg`));
+        deckMiddleTexture = p.loadImage(require(`./../../assets/SkateboardTextures/${newProps.deckMiddle}.jpg`));
+        truckTexture = p.loadImage(require(`./../../assets/SkateboardTextures/${newProps.trucks}.jpg`));
+        wheelTexture = p.loadImage(require(`./../../assets/SkateboardTextures/${newProps.wheels}.jpg`));
+    }
+
     p.myCustomRedrawAccordingToNewPropsHandler = function (newProps) {
+        
         //Init value
         skatePos = newProps.view;
         zoomPos = newProps.zoom;
+
+        //Initial Loads, render initial Textures
+        if(runOnce) {
+            runOnce = false;
+            renderTextures(newProps);
+        }
+
         if(canvas) {
             skatePos = newProps.view;    
             p.camera(
@@ -62,11 +73,8 @@ export default function Sketch (p) {
                 newProps.cameraCoord[8]
                 );
 
-            deckBottomTexture = p.loadImage(require(`./../../assets/SkateboardTextures/${newProps.deckBottom}.jpg`));
-            deckTopTexture = p.loadImage(require(`./../../assets/SkateboardTextures/${newProps.deckTop}.jpg`));
-            deckMiddleTexture = p.loadImage(require(`./../../assets/SkateboardTextures/${newProps.deckMiddle}.jpg`));
-            truckTexture = p.loadImage(require(`./../../assets/SkateboardTextures/${newProps.trucks}.jpg`));
-            wheelTexture = p.loadImage(require(`./../../assets/SkateboardTextures/${newProps.wheels}.jpg`));
+            //renderTextures if gallery button is pressed.
+            renderTextures(newProps);
         }
     };
 
@@ -108,12 +116,6 @@ export default function Sketch (p) {
         p.rotateX(toRadians(skatePos.x));
         p.rotateY(toRadians(skatePos.y));
         p.rotateZ(toRadians(skatePos.z));
-        
-        //Group Translate.
-        p.translate(0, 0, 0);
-
-        //Group Texture
-        //p.texture(skateTexture);
 
         //Deck Bottom Model
         p.push();
