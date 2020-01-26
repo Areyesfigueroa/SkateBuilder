@@ -7,6 +7,9 @@ import SectionWrapper from './components/SectionWrapper/SectionWrapper';
 import EditableText from './components/EditableText/EditableText';
 import SketchBuilder from './components/SkateBuilder/SkateBuilder';
 
+//TESTING
+import MultiCarousel from './components/MultiCarousel/MultiCarousel';
+
 function App() {
 
   return (
@@ -17,9 +20,12 @@ function App() {
         <EditableText placeholderText="My Board..."/>
       </SectionWrapper>
 
-      <SectionWrapper>
+      {/* <SectionWrapper>
         <SketchBuilder />
-      </SectionWrapper>      
+      </SectionWrapper>       */}
+
+      <MultiCarousel deviceType="desktop"/>
+
     </div>
   );
 }

@@ -1,5 +1,4 @@
 import React, {useContext} from 'react';
-
 import GalleryItem from './GalleryItem/GalleryItem';
 
 /**
@@ -10,7 +9,7 @@ import GalleryItem from './GalleryItem/GalleryItem';
 
 
 const GalleryItems = (props) => {
-    return props.instances.map((el) => (        
+    return props.instances.map((el) => (   
         <GalleryItem 
         key={`${props.type}_${el}`}
         imageName={`${props.type}_${el}`}
