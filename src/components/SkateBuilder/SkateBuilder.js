@@ -29,14 +29,13 @@ const zoomProperties = {
     MAX: 800
 }
 
-const galleryCount = {
-    'deck_bottom': 3,
-    'deck_top': 2,
-    'deck_middle': 2,
-    'trucks': 4,
-    'wheels': 2
+const galleryData = {
+    deckBottom: {type: 'deck_bottom', count: 3},
+    deckTop: {type: 'deck_top', count: 2},
+    deckMiddle: {type: 'deck_middle', count: 2},
+    trucks: {type: 'trucks', count: 4},
+    wheels: {type: 'wheels', count: 2}
 }
-
 
 const generateGalleryInstanceArr = (instanceCount) => {
     let instanceArr = [];
@@ -97,7 +96,7 @@ const initialState = {
     wheels: 'wheels_001'
 }
 
-const cameraReducer = (state, action) => {
+const viewCtrlReducer = (state, action) => {
     switch (action.viewState) {
         case viewStates.RESET:
             return { ...state, cameraCoord: [0,0,350, 0,0,0, 0,1,0] }
@@ -108,18 +107,18 @@ const cameraReducer = (state, action) => {
     }
 }
 
-const galleryReducer = (state, action) => {
-    const category = action.assetID.slice(0, action.assetID.length - 4);
-    switch(category) {
-        case 'deck_bottom':
+const galleryCtrlReducer = (state, action) => {
+    const type = action.assetID.slice(0, action.assetID.length - 4);
+    switch(type) {
+        case galleryData.deckBottom.type:
             return {...state, deckBottom: action.assetID}
-        case 'deck_top':
+        case galleryData.deckTop.type:
             return {...state, deckTop: action.assetID}
-        case 'deck_middle':
+        case galleryData.deckMiddle.type:
             return {...state, deckMiddle: action.assetID}
-        case 'trucks':
+        case galleryData.trucks.type:
             return {...state, trucks: action.assetID}
-        case 'wheels':
+        case galleryData.wheels.type:
             return {...state, deckBottom: action.assetID}
         default:
             console.log('No Category Selected');
@@ -128,42 +127,8 @@ const galleryReducer = (state, action) => {
 
 const SkateBuilder = () => {
 
-    //const [zoom, setZoom] = useState(300);
-    // const [deckBottom, setDeckBottom] = useState('deck_bottom_001');
-    // const [deckTop, setDeckTop] = useState('deck_top_001');
-    // const [deckMiddle, setDeckMiddle] = useState('deck_middle_001');
-    // const [trucks, setTrucks] = useState('trucks_001');
-    // const [wheels, setWheels] = useState('wheels_001');
-
-    // const galleryHandler = (event) => {
-    //     const id = event.target.closest('button').id;
-    //     //const type = event.target.closest('button').id.slice(0, id.length - 4);
-
-    //     return id;
-
-    //     // switch(btnCategory) {
-    //     //     case 'deck_bottom':
-    //     //         setDeckBottom(btnID);
-    //     //         break;
-    //     //     case 'deck_top':
-    //     //         setDeckTop(btnID);
-    //     //         break;
-    //     //     case 'deck_middle':
-    //     //         setDeckMiddle(btnID);
-    //     //         break;
-    //     //     case 'trucks':
-    //     //         setTrucks(btnID);
-    //     //         break;
-    //     //     case 'wheels':
-    //     //         setWheels(btnID);
-    //     //         break;
-    //     //     default:
-    //     //         console.log('No Category Matched');
-    //     // }
-    // }
-
-    const [cameraState, cameraDispatch] = useReducer(cameraReducer, initialState);
-    const [galleryState, galleryDispatch] = useReducer(galleryReducer, initialState);
+    const [viewCtrlState, viewCtrlDispatch] = useReducer(viewCtrlReducer, initialState);
+    const [galleryCtrlState, galleryCtrlDispatch] = useReducer(galleryCtrlReducer, initialState);
 
     return (
         <div className={classes.SkateBuilder}>
@@ -183,24 +148,24 @@ const SkateBuilder = () => {
             <P5Wrapper
             sketch={Sketch}
             skateTexture={require('./../../assets/Skateboard/textura.png')}
-            cameraCoord={cameraState.cameraCoord}
-            view={cameraState.view}
-            zoom={cameraState.zoom}
-            deckTop={galleryState.deckTop}
-            deckMiddle={galleryState.deckMiddle}
-            deckBottom={galleryState.deckBottom}
-            trucks={galleryState.trucks}
-            wheels={galleryState.wheels}
+            cameraCoord={viewCtrlState.cameraCoord}
+            view={viewCtrlState.view}
+            zoom={viewCtrlState.zoom}
+            deckTop={galleryCtrlState.deckTop}
+            deckMiddle={galleryCtrlState.deckMiddle}
+            deckBottom={galleryCtrlState.deckBottom}
+            trucks={galleryCtrlState.trucks}
+            wheels={galleryCtrlState.wheels}
             />
 
             <CameraController
             style={classes.cameraController}
-            click={(event) => cameraDispatch({ viewState: event.target.id.replace('Btn', '') })}
+            click={(event) => viewCtrlDispatch({ viewState: event.target.id.replace('Btn', '') })}
             />
 
             <ZoomController 
-            slider={(event) => cameraDispatch({ viewState: viewStates.ZOOM, zoomValue: event.target.value })}
-            default={cameraState.zoom}
+            slider={(event) => viewCtrlDispatch({ viewState: viewStates.ZOOM, zoomValue: event.target.value })}
+            default={viewCtrlState.zoom}
             min={zoomProperties.MIN}
             max={zoomProperties.MAX}
             />
@@ -208,24 +173,24 @@ const SkateBuilder = () => {
             {/* Right Hand Side */}
             <div className={classes.galleryControllers}>
                 <GalleryController 
-                type={'deck_bottom'} 
-                instances={generateGalleryInstanceArr(galleryCount['deck_bottom'])}
-                click={(event)=> galleryDispatch({assetID: event.target.closest('button').id})}
+                type={galleryData.deckBottom.type} 
+                instances={generateGalleryInstanceArr(galleryData.deckBottom.count)}
+                click={(event)=> galleryCtrlDispatch({assetID: event.target.closest('button').id})}
                 />
                 <GalleryController 
-                type={'deck_top'} 
-                instances={generateGalleryInstanceArr(galleryCount['deck_top'])}
-                click={(event)=> galleryDispatch({assetID: event.target.closest('button').id})}
+                type={galleryData.deckTop.type} 
+                instances={generateGalleryInstanceArr(galleryData.deckTop.count)}
+                click={(event)=> galleryCtrlDispatch({assetID: event.target.closest('button').id})}
                 />
                 <GalleryController 
-                type={'trucks'} 
-                instances={generateGalleryInstanceArr(galleryCount['trucks'])}
-                click={(event)=> galleryDispatch({assetID: event.target.closest('button').id})}
+                type={galleryData.trucks.type} 
+                instances={generateGalleryInstanceArr(galleryData.trucks.count)}
+                click={(event)=> galleryCtrlDispatch({assetID: event.target.closest('button').id})}
                 />
                 <GalleryController 
-                type={'wheels'} 
-                instances={generateGalleryInstanceArr(galleryCount['wheels'])}
-                click={(event)=> galleryDispatch({assetID: event.target.closest('button').id})}
+                type={galleryData.wheels.type} 
+                instances={generateGalleryInstanceArr(galleryData.wheels.count)}
+                click={(event)=> galleryCtrlDispatch({assetID: event.target.closest('button').id})}
                 />
             </div>
         </div>
