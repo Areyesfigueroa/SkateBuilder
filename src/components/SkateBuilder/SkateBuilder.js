@@ -11,7 +11,8 @@ import ButtonController from './../ButtonController/ButtonController';
 import GalleryController from './../GalleryController/GalleryController';
 /**
  * TODO:
- * 1. Change the board to the selected texture. 
+ * 1. Create a new prop so that it knows when to run the load image back in sketch.js.
+ * 2. Create the gallery slider functionality. 
  */
 
 const viewStates = {
@@ -84,7 +85,6 @@ const getViewCoord = (viewState, viewStates) => {
     return viewCoord
 }
 
-//TESTING
 const initialState = {
     cameraCoord: [0,0,350, 0,0,0, 0,1,0],
     view: getViewCoord(viewStates.DYNAMIC, viewStates),
