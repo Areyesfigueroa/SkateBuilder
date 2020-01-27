@@ -8,7 +8,7 @@ const GalleryItem = (props) => {
     return (
         <div className={classes.GalleryItem}>
             <Button id={props.imageName} variant="outline-secondary" onClick={props.click}>
-                <Image src={require(`./../../../../assets/SkateboardTextures/${props.imageName}.jpg`)} fluid thumbnail/>
+                <Image src={require(`./../../../assets/SkateboardTextures/${props.imageName}.jpg`)} fluid thumbnail/>
             </Button>
         </div>
     );

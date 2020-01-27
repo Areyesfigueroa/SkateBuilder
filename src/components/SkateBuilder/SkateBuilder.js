@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from 'react';
+import React, { useReducer } from 'react';
 import classes from './SkateBuilder.module.css';
 
 import Sketch from '../Sketch/sketch';
@@ -173,21 +173,29 @@ const SkateBuilder = () => {
             {/* Right Hand Side */}
             <div className={classes.galleryControllers}>
                 <GalleryController 
+                deviceType='Desktop'
+                displayItemsLength={2}
                 type={galleryData.deckBottom.type} 
                 instances={generateGalleryInstanceArr(galleryData.deckBottom.count)}
                 click={(event)=> galleryCtrlDispatch({assetID: event.target.closest('button').id})}
                 />
                 <GalleryController 
+                deviceType='Desktop'
+                displayItemsLength={2}
                 type={galleryData.deckTop.type} 
                 instances={generateGalleryInstanceArr(galleryData.deckTop.count)}
                 click={(event)=> galleryCtrlDispatch({assetID: event.target.closest('button').id})}
                 />
                 <GalleryController 
+                deviceType='Desktop'
+                displayItemsLength={2}
                 type={galleryData.trucks.type} 
                 instances={generateGalleryInstanceArr(galleryData.trucks.count)}
                 click={(event)=> galleryCtrlDispatch({assetID: event.target.closest('button').id})}
                 />
                 <GalleryController 
+                deviceType='Desktop'
+                displayItemsLength={2}
                 type={galleryData.wheels.type} 
                 instances={generateGalleryInstanceArr(galleryData.wheels.count)}
                 click={(event)=> galleryCtrlDispatch({assetID: event.target.closest('button').id})}

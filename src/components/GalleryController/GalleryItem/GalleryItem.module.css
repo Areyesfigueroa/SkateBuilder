@@ -1,0 +1,17 @@
+.GalleryItem {
+    width: auto;
+    height: auto;
+    margin-right: 30px;
+}
+
+.GalleryItem img {
+    width: 100%;
+    height: 100%;
+}
+
+.GalleryItem Button {
+    min-width: 100px;
+    max-width: 150px;
+    height: 200px;
+    overflow: hidden;
+}
