@@ -131,44 +131,45 @@ const SkateBuilder = () => {
     const [galleryCtrlState, galleryCtrlDispatch] = useReducer(galleryCtrlReducer, initialState);
 
     return (
-        <div className={classes.SkateBuilder}>
+        <div className={classes.container}>
             
-            <div className={classes.buttonControllers}>
-                <ButtonController 
-                btn1Name='Save to MyBoards' 
-                btn2Name='Add to cart'
+            {/* Left Hand Side */}
+            <div className={classes.sketch}>
+                <div className={classes.buttonControllers}>
+                    <ButtonController 
+                    btn1Name='Save to MyBoards' 
+                    btn2Name='Add to cart'
+                    />
+                    <ButtonController 
+                    btn1Name='3D' 
+                    btn2Name='2D'
+                    />
+                </div>
+                <P5Wrapper
+                sketch={Sketch}
+                skateTexture={require('./../../assets/Skateboard/textura.png')}
+                cameraCoord={viewCtrlState.cameraCoord}
+                view={viewCtrlState.view}
+                zoom={viewCtrlState.zoom}
+                deckTop={galleryCtrlState.deckTop}
+                deckMiddle={galleryCtrlState.deckMiddle}
+                deckBottom={galleryCtrlState.deckBottom}
+                trucks={galleryCtrlState.trucks}
+                wheels={galleryCtrlState.wheels}
                 />
-                <ButtonController 
-                btn1Name='3D' 
-                btn2Name='2D'
+
+                <CameraController
+                style={classes.cameraController}
+                click={(event) => viewCtrlDispatch({ viewState: event.target.id.replace('Btn', '') })}
+                />
+
+                <ZoomController 
+                slider={(event) => viewCtrlDispatch({ viewState: viewStates.ZOOM, zoomValue: event.target.value })}
+                default={viewCtrlState.zoom}
+                min={zoomProperties.MIN}
+                max={zoomProperties.MAX}
                 />
             </div>
-
-            {/* Left Hand Side */}
-            <P5Wrapper
-            sketch={Sketch}
-            skateTexture={require('./../../assets/Skateboard/textura.png')}
-            cameraCoord={viewCtrlState.cameraCoord}
-            view={viewCtrlState.view}
-            zoom={viewCtrlState.zoom}
-            deckTop={galleryCtrlState.deckTop}
-            deckMiddle={galleryCtrlState.deckMiddle}
-            deckBottom={galleryCtrlState.deckBottom}
-            trucks={galleryCtrlState.trucks}
-            wheels={galleryCtrlState.wheels}
-            />
-
-            <CameraController
-            style={classes.cameraController}
-            click={(event) => viewCtrlDispatch({ viewState: event.target.id.replace('Btn', '') })}
-            />
-
-            <ZoomController 
-            slider={(event) => viewCtrlDispatch({ viewState: viewStates.ZOOM, zoomValue: event.target.value })}
-            default={viewCtrlState.zoom}
-            min={zoomProperties.MIN}
-            max={zoomProperties.MAX}
-            />
 
             {/* Right Hand Side */}
             <div className={classes.galleryControllers}>
@@ -201,6 +202,7 @@ const SkateBuilder = () => {
                 click={(event)=> galleryCtrlDispatch({assetID: event.target.closest('button').id})}
                 />
             </div>
+           
         </div>
     );
 };

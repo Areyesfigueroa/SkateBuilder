@@ -1,5 +1,5 @@
 .ZoomController {
-    grid-area: zoom-controller;
+    /* grid-area: zoom-controller; */
     display: flex;
     width: 100%;
     justify-content: space-between;
