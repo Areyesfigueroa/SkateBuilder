@@ -4,16 +4,40 @@ export default function Sketch (p) {
     let skatePos;
 
     //Skate Obj Variables
-    let runOnce = true;
     let deckBottomObj, deckMiddleObj, deckTopObj, truckObj, wheelObj;
-    let deckBottomTexture, deckMiddleTexture, deckTopTexture, truckTexture, wheelTexture;
 
     //Zoom Variables
     let zoomPos = 0;
     let zoomSpeed = 0.05;
 
+    //Prev Props
+    const prevTextureProps = {
+        'deck_bottom': '',
+        'deck_top': '',
+        'deck_middle': '',
+        'trucks': '',
+        'wheels': ''
+    };
+    const boardTextures = {...prevTextureProps};
+
     const toRadians = function (x) {
         return x * Math.PI/180;
+    }
+
+    const renderBoardTextures = (newProps) => {
+        setBoardTexture('deck_bottom', newProps.deckBottom);
+        setBoardTexture('deck_top', newProps.deckTop);
+        setBoardTexture('deck_middle', newProps.deckMiddle);
+        setBoardTexture('trucks', newProps.trucks);
+        setBoardTexture('wheels', newProps.wheels);
+    }
+
+    const setBoardTexture = (key, newTexture) => {
+        if(prevTextureProps[key] !== newTexture) {
+            console.log(`Render new ${key}`);
+            prevTextureProps[key] = newTexture; //set prev props
+            boardTextures[key] = p.loadImage(require(`./../../assets/SkateboardTextures/${newTexture}.jpg`));
+        }
     }
 
     p.preload = function () {
@@ -36,26 +60,13 @@ export default function Sketch (p) {
         p.camera(0, 0, zoomPos, 0, 0, 0, 0, 1, 0);
     };
 
-    //TESTING
-    const renderTextures = (newProps) => {
-        deckBottomTexture = p.loadImage(require(`./../../assets/SkateboardTextures/${newProps.deckBottom}.jpg`));
-        deckTopTexture = p.loadImage(require(`./../../assets/SkateboardTextures/${newProps.deckTop}.jpg`));
-        deckMiddleTexture = p.loadImage(require(`./../../assets/SkateboardTextures/${newProps.deckMiddle}.jpg`));
-        truckTexture = p.loadImage(require(`./../../assets/SkateboardTextures/${newProps.trucks}.jpg`));
-        wheelTexture = p.loadImage(require(`./../../assets/SkateboardTextures/${newProps.wheels}.jpg`));
-    }
-
     p.myCustomRedrawAccordingToNewPropsHandler = function (newProps) {
         
         //Init value
         skatePos = newProps.view;
         zoomPos = newProps.zoom;
 
-        //Initial Loads, render initial Textures
-        if(runOnce) {
-            runOnce = false;
-            renderTextures(newProps);
-        }
+        renderBoardTextures(newProps);
 
         if(canvas) {
             skatePos = newProps.view;    
@@ -72,9 +83,6 @@ export default function Sketch (p) {
                 newProps.cameraCoord[7],
                 newProps.cameraCoord[8]
                 );
-
-            //renderTextures if gallery button is pressed.
-            renderTextures(newProps);
         }
     };
 
@@ -119,20 +127,20 @@ export default function Sketch (p) {
 
         //Deck Bottom Model
         p.push();
-        p.texture(deckBottomTexture);
+        p.texture(boardTextures['deck_bottom']);
         p.model(deckBottomObj);
         p.pop();
 
         //Deck Middle
         p.push();
-        p.texture(deckMiddleTexture);
+        p.texture(boardTextures['deck_middle']);
         p.model(deckMiddleObj);
         p.pop();
 
         //Deck Top
         p.push();
         p.translate(0, 0, 1);
-        p.texture(deckTopTexture);
+        p.texture(boardTextures['deck_top']);
         p.model(deckTopObj);
         p.pop();
 
@@ -140,7 +148,7 @@ export default function Sketch (p) {
         p.push();
         p.translate(0,0,-13);
         p.scale(0.8);
-        p.texture(truckTexture);
+        p.texture(boardTextures['trucks']);
         p.model(truckObj);
         p.pop();
 
@@ -148,7 +156,7 @@ export default function Sketch (p) {
         p.push();
         p.translate(0,0,-18);
         p.scale(0.77 );
-        p.texture(wheelTexture);
+        p.texture(boardTextures['wheels']);
         p.model(wheelObj);
         p.pop();
     };
