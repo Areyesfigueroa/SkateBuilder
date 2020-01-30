@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import classes from './GalleryController.module.css';
+
 import Carousel from "react-multi-carousel";
 import GalleryItem from "./GalleryItem/GalleryItem";
 import "react-multi-carousel/lib/styles.css";
@@ -34,6 +36,9 @@ const GalleryController = (props) => {
       },
     };
     return (
+      <Fragment>
+        <div className={classes.galleryTitle}>{props.title}</div>
+        
         <Carousel
         responsive={responsive}
         additionalTransfrom={0}
@@ -58,6 +63,8 @@ const GalleryController = (props) => {
         >
         {createGallery(props.type, props.instances, props.click)}
         </Carousel>
+      </Fragment>
+
     );
 };
 

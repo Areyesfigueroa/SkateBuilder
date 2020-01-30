@@ -25,6 +25,8 @@
 
 /* Left Side Layout AKA sketch */
 .sketch {
+    /* top: 100px; Dynamic Style */
+    position: relative;
     width: 100%;
     display: grid;
     grid-template-columns: 1fr;
@@ -52,6 +54,7 @@
     grid-template-rows: auto;
     margin-left: 50px;
 }
+
 
 
 

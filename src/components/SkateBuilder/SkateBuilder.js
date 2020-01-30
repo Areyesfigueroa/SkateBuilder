@@ -174,24 +174,28 @@ const SkateBuilder = () => {
             {/* Right Hand Side */}
             <div className={classes.galleryControllers}>
                 <GalleryController 
+                title='Bottom of the deck'
                 deviceType='Desktop'
                 type={galleryData.deckBottom.type} 
                 instances={generateGalleryInstanceArr(galleryData.deckBottom.count)}
                 click={(event)=> galleryCtrlDispatch({assetID: event.target.closest('button').id})}
                 />
                 <GalleryController 
+                title='Top of the deck'
                 deviceType='Desktop'
                 type={galleryData.deckTop.type} 
                 instances={generateGalleryInstanceArr(galleryData.deckTop.count)}
                 click={(event)=> galleryCtrlDispatch({assetID: event.target.closest('button').id})}
                 />
                 <GalleryController 
+                title='Trucks'
                 deviceType='Desktop'
                 type={galleryData.trucks.type} 
                 instances={generateGalleryInstanceArr(galleryData.trucks.count)}
                 click={(event)=> galleryCtrlDispatch({assetID: event.target.closest('button').id})}
                 />
                 <GalleryController 
+                title='Wheels'
                 deviceType='Desktop'
                 type={galleryData.wheels.type} 
                 instances={generateGalleryInstanceArr(galleryData.wheels.count)}
