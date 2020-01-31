@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
@@ -6,6 +6,8 @@ import Header from './components/Header/Header';
 import SectionWrapper from './components/SectionWrapper/SectionWrapper';
 import EditableText from './components/EditableText/EditableText';
 import SketchBuilder from './components/SkateBuilder/SkateBuilder';
+import Footer from './components/Footer/Footer';
+
 
 function App() {
 
@@ -20,6 +22,8 @@ function App() {
       <SectionWrapper>
         <SketchBuilder />
       </SectionWrapper>      
+
+      <Footer />
 
     </div>
   );

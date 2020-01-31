@@ -5,8 +5,6 @@ import Carousel from "react-multi-carousel";
 import GalleryItem from "./GalleryItem/GalleryItem";
 import "react-multi-carousel/lib/styles.css";
 
-
-
 const createGallery = (type, instances, click)=> {
     return instances.map((el) => (   
         <GalleryItem 
