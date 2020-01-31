@@ -10,6 +10,7 @@ import CameraController from './../CameraController/CameraController';
 import ZoomController from './../ZoomController/ZoomController';
 import ButtonController from './../ButtonController/ButtonController';
 import GalleryController from './../GalleryController/GalleryController';
+
 /**
  * TODO:
  * 1. Create a new prop so that it knows when to run the load image back in sketch.js.
@@ -135,7 +136,7 @@ const SkateBuilder = () => {
         <div className={classes.container}>
             
             {/* Left Hand Side */}
-                <div className={classes.sketch}>
+            <div className={classes.sketch}>
                     <div className={classes.sticky}> 
                         <div className={classes.buttonControllers}>
                                 <ButtonController 
@@ -176,35 +177,37 @@ const SkateBuilder = () => {
                 </div>
 
             {/* Right Hand Side */}
-            <div className={classes.galleryControllers}>
-                <GalleryController 
-                title='Bottom of the deck'
-                deviceType='Desktop'
-                type={galleryData.deckBottom.type} 
-                instances={generateGalleryInstanceArr(galleryData.deckBottom.count)}
-                click={(event)=> galleryCtrlDispatch({assetID: event.target.closest('button').id})}
-                />
-                <GalleryController 
-                title='Top of the deck'
-                deviceType='Desktop'
-                type={galleryData.deckTop.type} 
-                instances={generateGalleryInstanceArr(galleryData.deckTop.count)}
-                click={(event)=> galleryCtrlDispatch({assetID: event.target.closest('button').id})}
-                />
-                <GalleryController 
-                title='Trucks'
-                deviceType='Desktop'
-                type={galleryData.trucks.type} 
-                instances={generateGalleryInstanceArr(galleryData.trucks.count)}
-                click={(event)=> galleryCtrlDispatch({assetID: event.target.closest('button').id})}
-                />
-                <GalleryController 
-                title='Wheels'
-                deviceType='Desktop'
-                type={galleryData.wheels.type} 
-                instances={generateGalleryInstanceArr(galleryData.wheels.count)}
-                click={(event)=> galleryCtrlDispatch({assetID: event.target.closest('button').id})}
-                />
+            <div className={classes.galleryContainer}>
+                <div className={classes.galleryControllers}>
+                    <GalleryController 
+                    title='Bottom of the deck'
+                    deviceType='Desktop'
+                    type={galleryData.deckBottom.type} 
+                    instances={generateGalleryInstanceArr(galleryData.deckBottom.count)}
+                    click={(event)=> galleryCtrlDispatch({assetID: event.target.closest('button').id})}
+                    />
+                    <GalleryController 
+                    title='Top of the deck'
+                    deviceType='Desktop'
+                    type={galleryData.deckTop.type} 
+                    instances={generateGalleryInstanceArr(galleryData.deckTop.count)}
+                    click={(event)=> galleryCtrlDispatch({assetID: event.target.closest('button').id})}
+                    />
+                    <GalleryController 
+                    title='Trucks'
+                    deviceType='Desktop'
+                    type={galleryData.trucks.type} 
+                    instances={generateGalleryInstanceArr(galleryData.trucks.count)}
+                    click={(event)=> galleryCtrlDispatch({assetID: event.target.closest('button').id})}
+                    />
+                    <GalleryController 
+                    title='Wheels'
+                    deviceType='Desktop'
+                    type={galleryData.wheels.type} 
+                    instances={generateGalleryInstanceArr(galleryData.wheels.count)}
+                    click={(event)=> galleryCtrlDispatch({assetID: event.target.closest('button').id})}
+                    />
+                </div>
             </div>
            
         </div>

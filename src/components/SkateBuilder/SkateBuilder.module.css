@@ -26,12 +26,6 @@
     top: 20px;
 }
 
-.galleryControllers {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
-}
-
 .buttonControllers {
     display: flex;
     width: 100%;
@@ -39,15 +33,47 @@
 }
 
 /* Right Side Layout AKA gallery controllers */
+.galleryContainer {
+    width: 100%;
+    height: 100%;
+    margin-left: 50px;
+}
+
 .galleryControllers {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: auto;
-    margin-left: 50px;
 }
 
 .galleryControllers > div {
     margin-bottom: 10px;
+}
+
+@media only screen and (max-width: 900px) {
+    /* MOBILE LAYOUT */
+    .container {
+        width: 100%;
+        height: 100%;
+    
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+
+        justify-items: center;
+    }
+    /* Left Side */
+    .sticky {
+        top:0;
+        position: relative;
+    }
+
+    /* Right Side */
+    .galleryContainer {
+        overflow: scroll;
+        height: 300px;
+        margin-left: 0;
+        margin-top: 10px;
+    }
 }
 
 
