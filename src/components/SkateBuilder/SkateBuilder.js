@@ -95,7 +95,8 @@ const initialState = {
     deckTop: 'deck_top_001',
     deckMiddle: 'deck_middle_001',
     trucks: 'trucks_001',
-    wheels: 'wheels_001'
+    wheels: 'wheels_001',
+    dimension: '3D'
 }
 
 const viewCtrlReducer = (state, action) => {
@@ -127,10 +128,22 @@ const galleryCtrlReducer = (state, action) => {
     }
 }
 
+const buttonCtrlReducer = (state, action) => {
+    switch(action.type) {
+        case '2D':
+            console.log(action.type);
+            return {...state, dimension: action.type};
+        case '3D':
+            console.log(action.type);
+            return {...state, dimension: action.type};
+    }
+}
+
 const SkateBuilder = () => {
 
     const [viewCtrlState, viewCtrlDispatch] = useReducer(viewCtrlReducer, initialState);
     const [galleryCtrlState, galleryCtrlDispatch] = useReducer(galleryCtrlReducer, initialState);
+    const [buttonCtrlState, buttonCtrlDispatch] = useReducer(buttonCtrlReducer, initialState);
 
     return (
         <div className={classes.container}>
@@ -146,6 +159,7 @@ const SkateBuilder = () => {
                                 <ButtonController 
                                 btn1Name='3D' 
                                 btn2Name='2D'
+                                click={(event) => buttonCtrlDispatch({type: event.target.id.replace('Btn', '')})}
                                 />
                             </div>
 
@@ -160,6 +174,7 @@ const SkateBuilder = () => {
                         deckBottom={galleryCtrlState.deckBottom}
                         trucks={galleryCtrlState.trucks}
                         wheels={galleryCtrlState.wheels}
+                        dimension={buttonCtrlState.dimension}
                         />
 
                         <CameraController

@@ -10,6 +10,9 @@ export default function Sketch (p) {
     let zoomPos = 0;
     let zoomSpeed = 0.05;
 
+    //Button Controllers
+    let dimension;
+
     //Prev Props
     const prevTextureProps = {
         'deck_bottom': '',
@@ -65,6 +68,7 @@ export default function Sketch (p) {
         //Init value
         skatePos = newProps.view;
         zoomPos = newProps.zoom;
+        dimension = newProps.dimension;
 
         renderBoardTextures(newProps);
 
@@ -83,6 +87,7 @@ export default function Sketch (p) {
                 newProps.cameraCoord[7],
                 newProps.cameraCoord[8]
                 );
+            
         }
     };
 
@@ -118,7 +123,10 @@ export default function Sketch (p) {
 
         p.background(100);
         p.normalMaterial();
-        p.orbitControl(3, 3, zoomSpeed);
+
+        if(dimension === '3D') {
+            p.orbitControl(3, 3, zoomSpeed);
+        }
 
         //Group Rotate
         p.rotateX(toRadians(skatePos.x));
