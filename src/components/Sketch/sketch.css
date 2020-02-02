@@ -1,7 +1,14 @@
 .sketch {
     position: relative;
     width: 100%;
-    min-width: 300px;
-    max-width: 900px;
     height: 400px;
+    min-width: 200px;
+    max-width: 800px;
+    max-height: 400px;
+}
+
+@media only screen and (max-width: 460px) {
+    .sketch {
+        height: 300px
+    }
 }

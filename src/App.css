@@ -1,0 +1,24 @@
+@media only screen and (max-width: 600px) {
+    h1 {
+        font-size: 7vw;
+    }
+
+    .btn {
+        font-size: 3vw;
+    }
+
+    span {
+        font-size: 3.5vw;
+    }
+}
+
+@media only screen and (max-width: 300px) {
+
+    .btn {
+        font-size: 3.5vw;
+    }
+
+    span {
+        font-size: 3.5vw;
+    }
+}

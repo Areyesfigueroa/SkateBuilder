@@ -54,7 +54,7 @@ export default function Sketch (p) {
         //Default Values
         canvas = p.createCanvas(900, 400, p.WEBGL);
         canvas.elt.parentElement.classList.add('sketch');
-        canvas.elt.style.cssText=`visibility: hidden; width: 100%; height: 400px;`;
+        canvas.elt.style.cssText=`visibility: hidden; width: 100%; height: 100%;`;
         
         //Camera Default
         p.camera(0, 0, zoomPos, 0, 0, 0, 0, 1, 0);

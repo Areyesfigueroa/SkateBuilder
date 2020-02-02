@@ -12,6 +12,15 @@
 .GalleryItem Button {
     min-width: 100px;
     max-width: 150px;
-    height: 200px;
+    height: 180px;
     overflow: hidden;
+}
+
+@media only screen and (max-width: 460px) {
+    .GalleryItem Button {
+        min-width: 90px;
+        max-width: 100px;
+        height: 120px;
+        overflow: hidden;
+    }
 }
